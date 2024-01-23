@@ -401,7 +401,9 @@ function generateOdds(len) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(arr, indices) {}
+function getElementByIndices(/* arr, indices */) {
+  throw new Error('Not implemented');
+}
 
 /**
  * Returns the number of all falsy values in the specified array.
@@ -415,8 +417,16 @@ function getElementByIndices(arr, indices) {}
  *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  if (arr.length > 0) {
+    return arr.reduce((accumulator, element) => {
+      if (!element) {
+        return accumulator + 1;
+      }
+      return accumulator;
+    }, 0);
+  }
+  return arr.length;
 }
 
 /**
@@ -437,8 +447,19 @@ function getFalsyValuesCount(/* arr */) {
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  const matrix = Array(n).fill(0);
+  const matrix2 = matrix.map((bigCurrentValue, bigIndex) => {
+    let bigResult = Array(n).fill(0);
+    bigResult = bigResult.map((currentValue, index) => {
+      if (index === bigIndex) {
+        return 1;
+      }
+      return 0;
+    });
+    return bigResult;
+  });
+  return matrix2;
 }
 
 /**
@@ -452,8 +473,15 @@ function getIdentityMatrix(/* n */) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  const result = [];
+  numbers.map((currentValue, index) => {
+    if (currentValue % 2 !== 0) {
+      result.push(index);
+    }
+    return currentValue;
+  });
+  return result;
 }
 
 /**
@@ -466,8 +494,15 @@ function getIndicesOfOddNumbers(/* numbers */) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  if (arr.length === 0) {
+    return [];
+  }
+  const hexArr = arr.map((currentValue) => {
+    const color = currentValue.toString(16);
+    return `#${color}`;
+  });
+  return hexArr;
 }
 
 /**
