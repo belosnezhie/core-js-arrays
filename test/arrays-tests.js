@@ -743,10 +743,10 @@ describe('arrays-tasks', () => {
     'getHexRGBValues should return an array of RGB Hex strings',
     () => {
       [
-        // {
-        //   arr: [0, 255, 16777215],
-        //   expected: ['#000000', '#0000FF', '#FFFFFF'],
-        // },
+        {
+          arr: [0, 255, 16777215],
+          expected: ['#000000', '#0000FF', '#FFFFFF'],
+        },
         {
           arr: [],
           expected: [],
