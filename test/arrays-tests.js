@@ -823,10 +823,10 @@ describe('arrays-tasks', () => {
     'findLongestIncreasingSubsequence should return a length of the longest increasing subsequence',
     () => {
       [
-        // {
-        //   arr: [10, 22, 9, 33, 21, 50, 41, 60, 80],
-        //   expected: 3,
-        // },
+        {
+          arr: [10, 22, 9, 33, 21, 50, 41, 60, 80],
+          expected: 3,
+        },
         {
           arr: [3, 10, 2, 1, 20],
           expected: 2,

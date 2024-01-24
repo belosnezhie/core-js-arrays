@@ -293,11 +293,11 @@ function distinct(arr) {
  *    createNDimensionalArray(1, 1) => [0]
  */
 function createNDimensionalArray(/* n, size */) {
-  // if (size === 0) {
-  //   return [];
+  // if (n === 1 && size === 1) {
+  //   return [0];
   // }
   // const initialArr = Array(size).fill(0);
-  // initialArr * size
+  // return createNDimensionalArray()
   throw new Error('Not implemented');
 }
 
@@ -412,18 +412,13 @@ function generateOdds(len) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(/* arr, indices */) {
-  // const result = [];
-  // arr.reduce((accumulator, currentValue, index) => {
-  //   if (Array.isArray(currentValue)) {
-  //     getElementByIndices(currentValue, indices);
-  //   }
-  //   const indexInIndices = indices[index];
-  //   result.push(arr[indexInIndices]);
-  //   return accumulator;
-  // }, 0);
-  // return result;
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  if (indices.length === 1) {
+    return arr[indices[0]];
+  }
+  const innerArr = arr[indices[0]];
+  indices.shift();
+  return getElementByIndices(innerArr, indices);
 }
 
 /**
@@ -587,29 +582,27 @@ function findCommonElements(arr1, arr2) {
  *    findLongestIncreasingSubsequence([3, 10, 2, 1, 20]) => 2
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => 3
  */
-function findLongestIncreasingSubsequence(/* nums */) {
-  // let result = 0;
-  // let isNextBigger = true;
-  // nums.map((currentValue, index) => {
-  //   let lastNumber = 0;
-  //   if (nums[index + 1] !== undefined) {
-  //     lastNumber = nums[index + 1];
-  //   } else if (nums[index + 1] === undefined && isNextBigger === true) {
-  //     lastNumber = currentValue + 1;
-  //   } else {
-  //     lastNumber = currentValue - 1;
-  //   }
-  //   if (currentValue < lastNumber) {
-  //     result += 1;
-  //     isNextBigger = true;
-  //   } else {
-  //     result = 0;
-  //     isNextBigger = false;
-  //   }
-  //   return currentValue;
-  // });
-  // return result;
-  throw new Error('Not implemented');
+function findLongestIncreasingSubsequence(nums) {
+  let result = 1;
+  let currentResult = 1;
+  nums.map((currentValue, index) => {
+    if (index === 0) {
+      return currentValue;
+    }
+    if (currentValue > nums[index - 1]) {
+      currentResult += 1;
+    } else {
+      if (result < currentResult) {
+        result = currentResult;
+      }
+      currentResult = 1;
+    }
+    if (result < currentResult) {
+      result = currentResult;
+    }
+    return currentValue;
+  });
+  return result;
 }
 
 /**
@@ -652,8 +645,21 @@ function propagateItemsByPositionIndex(arr) {
  *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
-function shiftArray(/* arr, n */) {
-  throw new Error('Not implemented');
+function shiftArray(arr, n) {
+  if (n === 0) {
+    return arr;
+  }
+  let nCopy = n;
+  if (n > 0) {
+    const ending = arr.pop();
+    arr.unshift(ending);
+    nCopy = n - 1;
+  } else {
+    const begginning = arr.shift();
+    arr.push(begginning);
+    nCopy = n + 1;
+  }
+  return shiftArray(arr, nCopy);
 }
 
 /**
