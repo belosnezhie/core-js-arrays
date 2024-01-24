@@ -40,8 +40,19 @@ function getIntervalArray(start, end) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  const result = [];
+  const arr = [...Array(arr1), ...Array(arr2)];
+  const sortedArr = arr.sort((a, b) => (a.length < b.length ? 1 : -1));
+  sortedArr[0].map((currentValue, index) => {
+    if (sortedArr[1][index] !== undefined) {
+      result.push(currentValue + sortedArr[1][index]);
+    } else {
+      result.push(currentValue);
+    }
+    return currentValue;
+  });
+  return result;
 }
 
 /**
@@ -402,6 +413,16 @@ function generateOdds(len) {
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
 function getElementByIndices(/* arr, indices */) {
+  // const result = [];
+  // arr.reduce((accumulator, currentValue, index) => {
+  //   if (Array.isArray(currentValue)) {
+  //     getElementByIndices(currentValue, indices);
+  //   }
+  //   const indexInIndices = indices[index];
+  //   result.push(arr[indexInIndices]);
+  //   return accumulator;
+  // }, 0);
+  // return result;
   throw new Error('Not implemented');
 }
 
@@ -567,6 +588,27 @@ function findCommonElements(arr1, arr2) {
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => 3
  */
 function findLongestIncreasingSubsequence(/* nums */) {
+  // let result = 0;
+  // let isNextBigger = true;
+  // nums.map((currentValue, index) => {
+  //   let lastNumber = 0;
+  //   if (nums[index + 1] !== undefined) {
+  //     lastNumber = nums[index + 1];
+  //   } else if (nums[index + 1] === undefined && isNextBigger === true) {
+  //     lastNumber = currentValue + 1;
+  //   } else {
+  //     lastNumber = currentValue - 1;
+  //   }
+  //   if (currentValue < lastNumber) {
+  //     result += 1;
+  //     isNextBigger = true;
+  //   } else {
+  //     result = 0;
+  //     isNextBigger = false;
+  //   }
+  //   return currentValue;
+  // });
+  // return result;
   throw new Error('Not implemented');
 }
 
